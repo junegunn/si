@@ -39,7 +39,7 @@ Or install it yourself as:
 
 ```
 
-### Options
+#### Options
 
 - `:length` Number of digits. (default: 3)
 - `:base` For [binary prefix](http://en.wikipedia.org/wiki/Binary_prefix), set this to 1024 instead of default 1000.
@@ -55,7 +55,7 @@ Or install it yourself as:
 `si_byte` is simply a shorcut for 
 
 ```ruby
-SI#si(:length => length, :base => 1024, :min_exp => 0) + 'B'
+number.si(:length => length, :base => 1024, :min_exp => 0) + 'B'
 ```
 
 ```ruby
