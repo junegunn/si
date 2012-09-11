@@ -12,6 +12,7 @@ module SI
   }
 
   def si options = {}
+    options = { :length => options } if options.is_a?(Fixnum) && options >= 3
     options = DEFAULT.merge(options)
     length,
     min_exp,

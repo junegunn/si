@@ -176,5 +176,9 @@ class TestSI < Test::Unit::TestCase
   def test_edge_cases
     assert_equal '9.0000T', 9000000000001.si(:length => 5)
   end
+
+  def test_shortcut
+    assert_equal '123.5M', 123450000.si(4)
+  end
 end
 
