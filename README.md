@@ -63,11 +63,11 @@ Express a numeric value with SI prefix.
 13255342817.si_byte(3)  # '12.3GB'
 ```
 
-## SI module methods
+## SI module methods: convert / revert
 
 ```ruby
 SI.convert(9876543210000, :length => 5)  # '9.8765T'
-SI.revert('9.8765T', :base => 1024)  # '9.8765T'
+SI.revert('100k', :base => 1024)         # 102400.0
 ```
 
 ## Avoiding monkey-patching
