@@ -23,6 +23,8 @@ Or install it yourself as:
 Express a numeric value with SI prefix.
 
 ```ruby
+require 'si'
+
 0.9.si            # '900m'
 9.si              # '9'
 98.si             # '98'
