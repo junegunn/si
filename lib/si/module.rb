@@ -27,7 +27,6 @@ module SI
 
     def revert str, options = {}
       options = DEFAULT.select { |k, v| k == :base }.merge(options)
-      base    = options[:base]
       pair    = PREFIXES.to_a.find { |k, v| v == str[-1] }
 
       if pair
