@@ -173,12 +173,32 @@ class TestSI < Test::Unit::TestCase
     assert_equal '12.3GB', 13255342817.si_byte
   end
 
+  def test_is
+    assert_equal 9876543210000, 9876543210000.si.is
+  end
+
   def test_edge_cases
     assert_equal '9.0000T', 9000000000001.si(:length => 5)
   end
 
   def test_shortcut
     assert_equal '123.5M', 123450000.si(4)
+  end
+
+  def test_module_methods
+    assert_equal '9.8765T',          SI.convert(9876543210000, :length => 5)
+    assert_equal 9876500000000,      SI.revert('9.8765T')
+    assert_equal 9876500000,         SI.revert('9.8765G')
+    assert_equal 9876500,            SI.revert('9.8765M')
+    assert_equal 9.8765 * 1024 ** 2, SI.revert('9.8765M', :base => 1024)
+    assert_equal 0.0098765,          SI.revert('9.8765m')
+    assert_equal 0.0098765,          SI.revert('9.8765m')
+    assert_equal 9.8765,             SI.revert('9.8765')
+    assert_equal 0.0,                SI.revert('hello') # FIXME
+  end
+
+  def test_rational
+    assert_equal '12.345n', (12345 * (10 ** -12)).si(5)
   end
 end
 

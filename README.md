@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ### `si`
 
+Express a numeric value with SI prefix.
+
 ```ruby
 0.9.si            # '900m'
 9.si              # '9'
@@ -53,6 +55,14 @@ Or install it yourself as:
 9876543210000.si(5)  # '9.8765T'
 ```
 
+### `is`
+
+Revert to the original number.
+
+```ruby
+9876543210000.si.is  # 9876543210000
+```
+
 ### `si_byte`
 
 `si_byte` is simply a shorcut for 
@@ -63,6 +73,13 @@ number.si(:length => length, :base => 1024, :min_exp => 0) + 'B'
 
 ```ruby
 13255342817.si_byte(3)  # '12.3GB'
+```
+
+## SI module methods
+
+```ruby
+SI.convert(9876543210000, :length => 5)  # '9.8765T'
+SI.revert('9.8765T', :base => 1024)  # '9.8765T'
 ```
 
 ## Contributing
