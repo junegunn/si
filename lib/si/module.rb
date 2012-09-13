@@ -1,10 +1,4 @@
 module SI
-  module Revert
-    def is
-      @__si_num
-    end
-  end
-
   class << self
     def convert num, options = {}
       options = { :length => options } if options.is_a?(Fixnum) && options >= 3
@@ -24,7 +18,7 @@ module SI
           val = val.to_i if exp == 0 && num.is_a?(Fixnum)
           val = val.to_s.ljust(length + 1, '0') if val.is_a?(Float)
 
-          return "#{minus}#{val}#{PREFIXES[exp]}".extend(Revert).tap { |str| str.instance_variable_set(:@__si_num, num) }
+          return "#{minus}#{val}#{PREFIXES[exp]}"
         end
       end
 

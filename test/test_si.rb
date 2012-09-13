@@ -173,10 +173,6 @@ class TestSI < Test::Unit::TestCase
     assert_equal '12.3GB', 13255342817.si_byte
   end
 
-  def test_is
-    assert_equal 9876543210000, 9876543210000.si.is
-  end
-
   def test_edge_cases
     assert_equal '9.0000T', 9000000000001.si(:length => 5)
   end

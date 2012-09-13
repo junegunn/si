@@ -52,24 +52,12 @@ Express a numeric value with SI prefix.
 9876543210000.si(:length => 5)  # '9.8765T'
 
 # For convenience, a single Fixnum is recognized as :length value
-9876543210000.si(5)  # '9.8765T'
-```
-
-### `is`
-
-Revert to the original number.
-
-```ruby
-9876543210000.si.is  # 9876543210000
+9876543210000.si(5)             # '9.8765T'
 ```
 
 ### `si_byte`
 
-`si_byte` is simply a shorcut for 
-
-```ruby
-number.si(:length => length, :base => 1024, :min_exp => 0) + 'B'
-```
+`si_byte` is simply a shorcut for `number.si(:length => length, :base => 1024, :min_exp => 0) + 'B'`.
 
 ```ruby
 13255342817.si_byte(3)  # '12.3GB'
@@ -80,6 +68,16 @@ number.si(:length => length, :base => 1024, :min_exp => 0) + 'B'
 ```ruby
 SI.convert(9876543210000, :length => 5)  # '9.8765T'
 SI.revert('9.8765T', :base => 1024)  # '9.8765T'
+```
+
+## Avoiding monkey-patching
+
+Require 'si/minimal' instead to avoid monkey-patching numeric classes.
+
+```ruby
+require 'si/minimal'
+
+SI.convert(987654321, 3)  # 988M
 ```
 
 ## Contributing
