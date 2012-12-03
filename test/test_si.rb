@@ -187,9 +187,10 @@ class TestSI < Test::Unit::TestCase
     assert_equal 9876500000,         SI.revert('9.8765G')
     assert_equal 9876500,            SI.revert('9.8765M')
     assert_equal 9.8765 * 1024 ** 2, SI.revert('9.8765M', :base => 1024)
-    assert_equal 0.0098765,          SI.revert('9.8765m')
+    assert_equal 0.0000098765,       SI.revert('9.8765μ')
     assert_equal 0.0098765,          SI.revert('9.8765m')
     assert_equal 9.8765,             SI.revert('9.8765')
+    assert_equal 9.8765,             SI.revert('9.8765xxxyyyzzz')
     assert_equal 0.0,                SI.revert('hello') # FIXME
   end
 

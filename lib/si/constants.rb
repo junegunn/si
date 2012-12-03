@@ -1,7 +1,25 @@
 # encoding: utf-8
 
 module SI
-  PREFIXES = Hash[ -8.upto(8).zip(%[yzafpnμm kMGTPEZY].chars.map(&:strip)) ]
+  PREFIXES = {
+    -8 => 'y',
+    -7 => 'z',
+    -6 => 'a',
+    -5 => 'f',
+    -4 => 'p',
+    -3 => 'n',
+    -2 => 'μ',
+    -1 => 'm',
+     0 => '',
+     1 => 'k',
+     2 => 'M',
+     3 => 'G',
+     4 => 'T',
+     5 => 'P',
+     6 => 'E',
+     7 => 'Z',
+     8 => 'Y'
+  }
 
   DEFAULT = {
     :length  =>    3,
