@@ -197,5 +197,19 @@ class TestSI < Test::Unit::TestCase
   def test_rational
     assert_equal '12.345n', (12345 * (10 ** -12)).si(5)
   end
+
+  def test_zero
+    assert_equal '0.0000', 0.0.si(5)
+    assert_equal '0.000',  0.0.si(4)
+    assert_equal '0.0',    0.0.si(2)
+    assert_equal '0', 0.si(4)
+    assert_equal '0', 0.si(2)
+    assert_equal '0', 0.si
+  end
+
+  def test_invalid_length
+    assert_raise(ArgumentError) { 123.si(0) }
+    assert_raise(ArgumentError) { 123.si(1) }
+  end
 end
 
