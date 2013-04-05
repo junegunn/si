@@ -45,10 +45,12 @@ require 'si'
 
 #### Options
 
-- `:length` Number of digits. (default: 3)
-- `:base` For [binary prefix](http://en.wikipedia.org/wiki/Binary_prefix), set this to 1024 instead of default 1000.
-- `:min_exp` Default: -8, down to <strong>y</strong>octo
-- `:max_exp` Default:  8, up to <strong>Y</strong>otta
+| Option     | Default | Description                                                                                               |
+|------------|---------|-----------------------------------------------------------------------------------------------------------|
+| `:length`  |       3 | Number of digits                                                                                          |
+| `:base`    |    1000 | For [binary prefix](http://en.wikipedia.org/wiki/Binary_prefix), set this to 1024 instead of default 1000 |
+| `:min_exp` |      -8 | Down to <strong>y</strong>octo                                                                            |
+| `:max_exp` |       8 | Up to <strong>Y</strong>otta                                                                              |
 
 ```ruby
 9876543210000.si(:length => 5)  # '9.8765T'
