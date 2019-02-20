@@ -1,12 +1,11 @@
 class Float
   include SI
 end
-
-class Fixnum
+class BigDecimal
   include SI
 end
 
-class Bignum
+class Integer
   include SI
 end
 
