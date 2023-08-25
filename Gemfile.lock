@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    si (0.1.4)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    power_assert (2.0.3)
+    test-unit (3.6.1)
+      power_assert
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  si!
+  test-unit (~> 3.6, >= 3.6.1)
+
+BUNDLED WITH
+   2.4.10
