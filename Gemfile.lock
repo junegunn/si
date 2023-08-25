@@ -7,6 +7,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     power_assert (2.0.3)
+    rake (13.0.6)
     test-unit (3.6.1)
       power_assert
 
@@ -14,6 +15,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rake (~> 13.0, >= 13.0.6)
   si!
   test-unit (~> 3.6, >= 3.6.1)
 
