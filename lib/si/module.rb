@@ -1,13 +1,13 @@
 module SI
   class << self
     def convert num, options = {}
-      options = { :length => options } if options.is_a?(Fixnum)
+      options = { :length => options } if options.is_a?(Numeric)
       options = DEFAULT.merge(options)
       length,
       min_exp,
       max_exp = options.values_at(:length, :min_exp, :max_exp)
       raise ArgumentError.new("Invalid length") if length < 2
-      return num.is_a?(Fixnum) ? '0' : "0.#{'0' * (length - 1)}" if num == 0
+      return num.is_a?(Float) ? "0.#{'0' * (length - 1)}" : '0' if num == 0
 
       base    = options[:base].to_f
       minus   = num < 0 ? '-' : ''
@@ -18,7 +18,7 @@ module SI
         if nump >= denom || exp == min_exp
           val = nump / denom
           val = SI.round val, [length - val.to_i.to_s.length, 0].max
-          val = val.to_i if exp == 0 && num.is_a?(Fixnum)
+          val = val.to_i if exp == 0 && !num.is_a?(Float)
           val = val.to_s.ljust(length + 1, '0') if val.is_a?(Float)
 
           return "#{minus}#{val}#{PREFIXES[exp]}"

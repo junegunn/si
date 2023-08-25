@@ -1,15 +1,7 @@
-class Float
-  include SI
-end
+['Float', 'Fixnum', 'Bignum', 'Rational', 'Integer'].each do |const|
+  next unless Object.const_defined?(const)
 
-class Fixnum
-  include SI
-end
-
-class Bignum
-  include SI
-end
-
-class Rational
-  include SI
+  Object.const_get(const).class_eval do
+    include SI
+  end
 end
