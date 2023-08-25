@@ -1,3 +1,7 @@
+original_verbosity = $VERBOSE
+
+$VERBOSE = nil
+
 ['Float', 'Fixnum', 'Bignum', 'Rational', 'Integer'].each do |const|
   next unless Object.const_defined?(const)
 
@@ -5,3 +9,5 @@
     include SI
   end
 end
+
+$VERBOSE = original_verbosity
