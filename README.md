@@ -45,33 +45,42 @@ require 'si'
 
 #### Options
 
-| Option     | Default | Description                                                                                               |
-|------------|---------|-----------------------------------------------------------------------------------------------------------|
-| `:length`  |       3 | Number of digits                                                                                          |
-| `:base`    |    1000 | For [binary prefix](http://en.wikipedia.org/wiki/Binary_prefix), set this to 1024 instead of default 1000 |
-| `:min_exp` |      -8 | Down to <strong>y</strong>octo                                                                            |
-| `:max_exp` |       8 | Up to <strong>Y</strong>otta                                                                              |
+| Option       | Default   | Description                                                                                                 |
+| ------------ | --------- | ----------------------------------------------------------------------------------------------------------- |
+| `:length`    | 3         | Number of digits                                                                                            |
+| `:base`      | 1000      | For [binary prefix](http://en.wikipedia.org/wiki/Binary_prefix), set this to 1024 instead of default 1000   |
+| `:space`     | `''`      | Space between number and prefix. Set to `' '` to get `9.88 T` instead of `9.88T`                            |
+| `:min_exp`   | -8        | Down to <strong>y</strong>octo                                                                              |
+| `:max_exp`   | 8         | Up to <strong>Y</strong>otta                                                                                |
 
 ```ruby
-9876543210000.si(:length => 5)  # '9.8765T'
+9876543210000.si(length: 5)  # '9.8765T'
 
 # For convenience, a single Fixnum is recognized as :length value
 9876543210000.si(5)             # '9.8765T'
 ```
 
-### `si_byte`
+### `si_bytes`
 
-`si_byte` is simply a shorcut for `number.si(:length => length, :base => 1024, :min_exp => 0) + 'B'`.
+Formats the number of bytes using SI prefixes (base 1000).
 
 ```ruby
-13255342817.si_byte(3)  # '12.3GB'
+13255342817.si_bytes  # '13.3GB'
+```
+
+### `bin_bytes`
+
+Formats the number of bytes using binary prefixes (base 1024).
+
+```ruby
+13255342817.bin_bytes  # '12.3GiB'
 ```
 
 ## SI module methods: convert / revert
 
 ```ruby
-SI.convert(9876543210000, :length => 5)  # '9.8765T'
-SI.revert('100k', :base => 1024)         # 102400.0
+SI.convert(9876543210000, length: 5)  # '9.8765T'
+SI.revert('100k', base: 1024)         # 102400.0
 ```
 
 ## Avoiding monkey-patching

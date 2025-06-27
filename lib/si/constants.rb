@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module SI
   PREFIXES = {
@@ -10,22 +10,22 @@ module SI
     -3 => 'n',
     -2 => 'μ',
     -1 => 'm',
-     0 => '',
-     1 => 'k',
-     2 => 'M',
-     3 => 'G',
-     4 => 'T',
-     5 => 'P',
-     6 => 'E',
-     7 => 'Z',
-     8 => 'Y'
-  }
+    0 => '',
+    1 => 'k',
+    2 => 'M',
+    3 => 'G',
+    4 => 'T',
+    5 => 'P',
+    6 => 'E',
+    7 => 'Z',
+    8 => 'Y'
+  }.freeze
 
   DEFAULT = {
-    :length  =>    3,
-    :base    => 1000,
-    :min_exp =>   -8,
-    :max_exp =>    8,
-  }
+    length: 3,
+    base: 1000,
+    space: '',
+    min_exp: -8,
+    max_exp: 8
+  }.freeze
 end
-

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# encoding: utf-8
+# frozen_string_literal: true
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'test/unit'
@@ -46,31 +46,31 @@ class TestSI < Test::Unit::TestCase
       1.23457m
       12.3457m
       123.457m
-    
+
       1.23457
       12.3457
       123.457
-    
+
       1.23457k
       12.3457k
       123.457k
-    
+
       1.23457M
       12.3457M
       123.457M
-    
+
       1.23457G
       12.3457G
       123.457G
-    
+
       1.23457T
       12.3457T
       123.457T
-    
+
       1.23457P
       12.3457P
       123.457P
-    
+
       1.23457E
       12.3457E
       123.457E
@@ -91,14 +91,14 @@ class TestSI < Test::Unit::TestCase
       123456700Y
       1234567000Y
     ].each do |ret|
-      assert_equal ret, val.si(:length => 6)
-      assert_equal '-' + ret, (-val).si(:length => 6)
+      assert_equal ret, val.si(length: 6)
+      assert_equal '-' + ret, (-val).si(length: 6)
       val *= 10
     end
   end
 
   def test_si_base
-    val = 807936
+    val = 807_936
     %w[
       789k
       789M
@@ -107,86 +107,121 @@ class TestSI < Test::Unit::TestCase
       807936T
       827326464T
     ].each do |ret|
-      assert_equal ret, val.si(:base => 1024, :max_exp => 4)
+      assert_equal ret, val.si(base: 1024, max_exp: 4)
       val *= 1024
     end
   end
 
-  def test_si_byte
+  def test_bin_bytes
     {
-      1234132             => '1.18MB',
-      123004132           => '117MB',
-      123004999132        => '115GB',
-      555123004999132     => '505TB',
-      5555123004999132    => '4.93PB',
-      3335555123004999132 => '2.89EB',
-      0.001               => '0.00B',
-      0.005               => '0.01B',
-      0.01                => '0.01B',
-      0.1                 => '0.10B',
-      0                   => '0B',
-      1                   => '1B',
-      1.0                 => '1.00B',
-      1.01                => '1.01B',
-      10                  => '10B',
-      10.0                => '10.0B',
-      100                 => '100B',
-      100.0               => '100B',
-      0.0                 => '0.00B',
-      0.123412            => '0.12B',
-      0.0123412           => '0.01B',
-      0.00123412          => '0.00B',
+      1_234_132 => '1.18MiB',
+      123_004_132 => '117MiB',
+      123_004_999_132 => '115GiB',
+      555_123_004_999_132 => '505TiB',
+      5_555_123_004_999_132 => '4.93PiB',
+      3_335_555_123_004_999_132 => '2.89EiB',
+      0.001 => '0.00B',
+      0.005 => '0.01B',
+      0.01 => '0.01B',
+      0.1 => '0.10B',
+      0 => '0B',
+      1 => '1B',
+      1.0 => '1.00B',
+      1.01 => '1.01B',
+      10 => '10B',
+      10.0 => '10.0B',
+      100 => '100B',
+      100.0 => '100B',
+      0.0 => '0.00B',
+      0.123412 => '0.12B',
+      0.0123412 => '0.01B',
+      0.00123412 => '0.00B'
     }.each do |val, ret|
-      assert_equal ret, val.si_byte
+      assert_equal ret, val.bin_bytes
 
-      if val == 0
-        assert_equal ret, (-val).si_byte
+      if val.zero?
+        assert_equal ret, (-val).bin_bytes
       else
-        assert_equal '-' + ret, (-val).si_byte unless val == 0
+        assert_equal "-#{ret}", (-val).bin_bytes
+      end
+    end
+  end
+
+  def test_si_bytes
+    {
+      1_234_132 => '1.23MB',
+      123_004_132 => '123MB',
+      123_004_999_132 => '123GB',
+      555_123_004_999_132 => '555TB',
+      5_555_123_004_999_132 => '5.56PB',
+      3_335_555_123_004_999_132 => '3.34EB',
+      0.001 => '0.00B',
+      0.005 => '0.01B',
+      0.01 => '0.01B',
+      0.1 => '0.10B',
+      0 => '0B',
+      1 => '1B',
+      1.0 => '1.00B',
+      1.01 => '1.01B',
+      10 => '10B',
+      10.0 => '10.0B',
+      100 => '100B',
+      100.0 => '100B',
+      0.0 => '0.00B',
+      0.123412 => '0.12B',
+      0.0123412 => '0.01B',
+      0.00123412 => '0.00B'
+    }.each do |val, ret|
+      assert_equal ret, val.si_bytes
+
+      if val.zero?
+        assert_equal ret, (-val).si_bytes
+      else
+        assert_equal "-#{ret}", (-val).si_bytes
       end
     end
   end
 
   def test_readme
     {
-      0.009         => '9.00m',
-      0.09          => '90.0m',
-      0.9           => '900m',
-      9             => '9',
-      98            => '98',
-      987           => '987',
-      9876          => '9.88k',
-      98765         => '98.8k',
-      987654        => '988k',
-      9876543       => '9.88M',
-      98765432      => '98.8M',
-      987654321     => '988M',
-      9876543210    => '9.88G',
-      98765432100   => '98.8G',
-      987654321000  => '988G',
-      9876543210000 => '9.88T',
+      0.009 => '9.00m',
+      0.09 => '90.0m',
+      0.9 => '900m',
+      9 => '9',
+      98 => '98',
+      987 => '987',
+      9876 => '9.88k',
+      98_765 => '98.8k',
+      987_654 => '988k',
+      9_876_543 => '9.88M',
+      98_765_432 => '98.8M',
+      987_654_321 => '988M',
+      9_876_543_210 => '9.88G',
+      98_765_432_100 => '98.8G',
+      987_654_321_000 => '988G',
+      9_876_543_210_000 => '9.88T'
     }.each do |val, ret|
       assert_equal ret, val.si
     end
 
-    assert_equal '9.8765T', 9876543210000.si(:length => 5)
-    assert_equal '12.3GB', 13255342817.si_byte
+    assert_equal '9.8765T', 9_876_543_210_000.si(length: 5)
+    assert_equal '12.3GB', 13_255_342_817.si_byte
   end
 
   def test_edge_cases
-    assert_equal '9.0000T', 9000000000001.si(:length => 5)
+    assert_equal '9.0000 T', 9_000_000_000_001.si(length: 5, space: ' ')
   end
 
   def test_shortcut
-    assert_equal '123.5M', 123450000.si(4)
+    assert_equal '123.5M', 123_450_000.si(4)
   end
 
   def test_module_methods
-    assert_equal '9.8765T',          SI.convert(9876543210000, :length => 5)
-    assert_equal 9876500000000,      SI.revert('9.8765T')
-    assert_equal 9876500000,         SI.revert('9.8765G')
-    assert_equal 9876500,            SI.revert('9.8765M')
-    assert_equal 9.8765 * 1024 ** 2, SI.revert('9.8765M', :base => 1024)
+    assert_equal '9.8765T', SI.convert(9_876_543_210_000, length: 5)
+    assert_equal 9_876_500_000_000, SI.revert('9.8765T')
+    assert_equal 9_876_500_000, SI.revert('9.8765G')
+    assert_equal 9_876_500, SI.revert('9.8765M')
+    assert_equal 9.8765 * 1024**2, SI.revert('9.8765M', base: 1024)
     assert_equal 0.0000098765,       SI.revert('9.8765μ')
     assert_equal 0.0098765,          SI.revert('9.8765m')
     assert_equal 9.8765,             SI.revert('9.8765')
@@ -195,7 +230,7 @@ class TestSI < Test::Unit::TestCase
   end
 
   def test_rational
-    assert_equal '12.345n', (12345 * (10 ** -12)).si(5)
+    assert_equal '12.345n', (12_345 * (10**-12)).si(5)
   end
 
   def test_zero
@@ -212,4 +247,3 @@ class TestSI < Test::Unit::TestCase
     assert_raise(ArgumentError) { 123.si(1) }
   end
 end
-
